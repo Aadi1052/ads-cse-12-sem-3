@@ -1,47 +1,36 @@
+// Program to check whether a given number/string is palindrome using stack
+
 #include <iostream>
+#include <stack>
+#include <string>
 using namespace std;
 
 int main()
 {
-    int n, temp, digit;
-    int stack[100];
-    int top = -1;
+    string str;
+    stack<char> s;
 
-    cout << "Enter number: ";
-    cin >> n;
+    cout << "Enter a number or string: ";
+    cin >> str;
 
-    temp = n;
-
-    // Push digits into stack
-    while (temp > 0)
+    // Push all characters into stack
+    for (char ch : str)
     {
-        digit = temp % 10;
-        stack[++top] = digit;
-        temp = temp / 10;
+        s.push(ch);
     }
 
-    temp = n;
-    bool flag = true;
-
-    // Compare with stack
-    while (temp > 0)
+    // Compare original string with stack
+    for (char ch : str)
     {
-        digit = temp % 10;
-
-        if (digit != stack[top])
+        if (ch != s.top())
         {
-            flag = false;
-            break;
+            cout << "Not a palindrome";
+            return 0;
         }
-
-        top--;
-        temp = temp / 10;
+        s.pop();
     }
 
-    if (flag)
-        cout << "Palindrome";
-    else
-        cout << "Not Palindrome";
+    cout << "Palindrome";
 
     return 0;
 }
